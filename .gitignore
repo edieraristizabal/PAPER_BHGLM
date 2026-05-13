@@ -3,3 +3,12 @@
 .anthropic
 .antigravity
 .claud
+
+# LaTeX temporary files
+*.aux
+*.log
+*.toc
+*.out
+*.bbl
+*.blg
+*.pdf
