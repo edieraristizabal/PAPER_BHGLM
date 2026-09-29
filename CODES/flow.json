@@ -1,0 +1,304 @@
+{
+  "image_info": {
+    "resolution_dpi": 300,
+    "format": "PNG",
+    "orientation": "portrait",
+    "aspect_ratio": "2:3"
+  },
+  "overall_style": {
+    "aesthetic": "flat vector scientific infographic, clean academic poster style",
+    "icon_style": "simple hand-drawn black line-art icons",
+    "font_style": "bold sans-serif labels",
+    "background_color": "white",
+    "box_shape": "rounded rectangles",
+    "connector_style": "thin black connecting arrows with direction heads",
+    "color_palette": {
+      "peach_input": "#FFD5A1",
+      "pale_grey_units": "#E0E0E0",
+      "pale_blue_models": "#C9E2F5",
+      "map_gradient": {
+        "low": "green",
+        "medium": "orange",
+        "high": "red"
+      },
+      "map_basins": {
+        "atrato": "green",
+        "cauca": "red",
+        "magdalena": "blue"
+      }
+    }
+  },
+  "layout": {
+    "structure": "top-down process flow with parallel modeling section and output map",
+    "top_section": "row of two side-by-side peach input boxes merging",
+    "middle_section": "two stacked pale grey units of analysis boxes",
+    "bottom_section": "vertical sequence of pale blue model boxes, with parallel sub-models, and converging model selection",
+    "right_panel": "taller parallel 'Susceptibility Map' panel",
+    "elements": [
+      {
+        "row": 1,
+        "element_type": "input_row",
+        "boxes": [
+          {
+            "id": "input1",
+            "title": "Landslide Inventory",
+            "color_fill": "peach_input",
+            "icon": {
+              "description": "hand-drawn icon of a hill slope with a landslide, soils, a small tree, a cloud, and rain",
+              "labels": [
+                {
+                  "type": "viñeta",
+                  "text": "Rockslide, Soils"
+                }
+              ]
+            },
+            "count_text": "n = 10,837; 1970-2023",
+            "connectors_out": [
+              {
+                "to": "unit1"
+              }
+            ]
+          },
+          {
+            "id": "input2",
+            "title": "Predictors",
+            "color_fill": "peach_input",
+            "icons": [
+              {
+                "description": "icon of a rain cloud"
+              },
+              {
+                "description": "icon of a slope with a ruler"
+              },
+              {
+                "description": "icon of a mountain peak with elevation marks"
+              }
+            ],
+            "labels": [
+              {
+                "type": "viñeta",
+                "text": "Rainfall Days"
+              },
+              {
+                "type": "viñeta",
+                "text": "Mean Slope"
+              },
+              {
+                "type": "viñeta",
+                "text": "Mean Elevation"
+              }
+            ],
+            "connectors_out": [
+              {
+                "to": "unit1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "row": 2,
+        "element_type": "single_box",
+        "box": {
+          "id": "unit1",
+          "title": "Basins (spatial heterogeneity)",
+          "color_fill": "pale_grey_units",
+          "icon": {
+            "description": "simplified map icon of Colombia/Andes with three colored basin zones: Atrato (green), Cauca (red), Magdalena (blue)",
+            "label_texts": "Atrato, Cauca, Magdalena"
+          },
+          "connectors_out": [
+            {
+              "to": "unit2"
+            }
+          ]
+        }
+      },
+      {
+        "row": 3,
+        "element_type": "single_box",
+        "box": {
+          "id": "unit2",
+          "title": "Catchments (spatial dependence)",
+          "color_fill": "pale_grey_units",
+          "icon": {
+            "description": "map icon of a fine, interlocking polygonal catchment network"
+          },
+          "labels": [
+            {
+              "type": "viñeta",
+              "text": "Catchment-to-catchment adjacency"
+            }
+          ],
+          "count_text": "n = 526",
+          "connectors_out": [
+            {
+              "to": "m1"
+            }
+          ]
+        }
+      },
+      {
+        "row": 4,
+        "element_type": "model_sequence",
+        "m1": {
+          "id": "m1",
+          "title": "M1: Poisson GLM (Baseline)",
+          "color_fill": "pale_blue_models",
+          "icon": {
+            "description": "chart icon showing data points on a line",
+            "labels": [
+              {
+                "type": "viñeta",
+                "text": "Spatial independence assumed"
+              }
+            ]
+          },
+          "connectors_out": [
+            {
+              "to": "m2"
+            }
+          ]
+        },
+        "m2": {
+          "id": "m2",
+          "title": "M2: + Basin Random Intercept",
+          "color_fill": "pale_blue_models",
+          "icon": {
+            "description": "chart icon showing two point series"
+          },
+          "connectors_out": [
+            {
+              "to": "m3"
+            },
+            {
+              "to": "m4"
+            },
+            {
+              "to": "m5"
+            }
+          ]
+        },
+        "parallel_models": {
+          "row": "parallel",
+          "boxes": [
+            {
+              "id": "m3",
+              "title": "M3: ICAR",
+              "color_fill": "pale_blue_models",
+              "icon": {
+                "description": "structured spatial network icon",
+                "symbol": "ρ",
+                "labels": [
+                  {
+                    "type": "viñeta",
+                    "text": "+ CAR Spatial Random Effect"
+                  }
+                ]
+              },
+              "connectors_out": [
+                {
+                  "to": "selection"
+                }
+              ]
+            },
+            {
+              "id": "m4",
+              "title": "M4: BYM",
+              "color_fill": "pale_blue_models",
+              "icon": {
+                "description": "icon showing structured and unstructured spatial effects combination",
+                "symbol": "ρ + σ",
+                "labels": [
+                  {
+                    "type": "viñeta",
+                    "text": "+ Structured & Unstructured Spatial Effects"
+                  }
+                ]
+              },
+              "connectors_out": [
+                {
+                  "to": "selection"
+                }
+              ]
+            },
+            {
+              "id": "m5",
+              "title": "M5: Leroux",
+              "color_fill": "pale_blue_models",
+              "icon": {
+                "description": "mixing effects icon",
+                "symbol": "λ x ρ",
+                "labels": [
+                  {
+                    "type": "viñeta",
+                    "text": "+ Mixing Spatial Effects"
+                  }
+                ]
+              },
+              "connectors_out": [
+                {
+                  "to": "selection"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "row": 7,
+        "element_type": "single_box",
+        "box": {
+          "id": "selection",
+          "title": "Model Selection",
+          "color_fill": "white",
+          "icon": {
+            "description": "podium or ranking chart icon",
+            "labels": [
+              {
+                "type": "viñeta",
+                "text": "Criteria used: DIC, WAIC, Moran's I"
+              }
+            ]
+          },
+          "connectors_out": [
+            {
+              "to": "map_panel"
+            }
+          ]
+        }
+      }
+    ],
+    "right_panel_details": {
+      "id": "map_panel",
+      "title": "Susceptibility Map",
+      "taller_panel": true,
+      "parallel_to": [
+        "m1",
+        "m2",
+        "parallel_models",
+        "selection"
+      ],
+      "map_content": {
+        "terrain_type": "detailed relief shaded terrain map of the target Andean region (Colombia)",
+        "overlay_type": "catchment polygonal network",
+        "overlay_coloring": {
+          "color_model": "heat gradient",
+          "levels": {
+            "low": "green",
+            "medium": "orange",
+            "high": "red"
+          }
+        }
+      },
+      "map_legend": {
+        "position": "left of map",
+        "gradient_type": "vertical color gradient",
+        "label_positions": {
+          "top": "High",
+          "bottom": "Low"
+        }
+      }
+    }
+  }
+}

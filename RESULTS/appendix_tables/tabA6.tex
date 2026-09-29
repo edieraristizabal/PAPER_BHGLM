@@ -1,0 +1,21 @@
+\begin{table*}[h]
+\caption{Sensitivity of the models to the aggregation of the slope predictor. Upper block: the catchment-mean slope is replaced by alternative within-catchment summaries computed from the 12.5~m DEM. Lower block: slope enters through $S_c$, the catchment integral of the within-catchment slope response (Sect.~\ref{secA6}). $\sigma^2_u$ and $\rho$: variance and mixing parameter of the Leroux latent field; $r_u$: correlation of the M5 latent field with that of the published specification; $\beta_S$: standardized slope coefficient in M5 with 95\% credible interval.}\label{tabA6}
+\footnotesize
+\begin{tabular}{@{}lrrrrrrrl@{}}
+\toprule
+ & M1 & M4 & \multicolumn{6}{c}{M5-Leroux} \\
+\cmidrule(lr){4-9}
+Slope predictor & DIC & DIC & DIC & MI & $\sigma^2_u$ & $\rho$ & $r_u$ & $\beta_S$ \\
+\midrule
+Mean slope (published) & 10,941 & 2,551 & 2,572 & -0.172 & 2.51 & 0.894 & 1.000 & 0.84 [0.63, 1.05] \\
+90th percentile & 11,411 & 2,546 & 2,562 & -0.176 & 2.49 & 0.899 & 0.993 & 0.97 [0.75, 1.19] \\
+Area fraction $>20^{\circ}$ & 10,579 & 2,551 & 2,573 & -0.170 & 2.53 & 0.892 & 0.997 & 0.77 [0.58, 0.97] \\
+Area fraction $>25^{\circ}$ & 11,068 & 2,552 & 2,573 & -0.164 & 2.57 & 0.906 & 0.994 & 0.70 [0.51, 0.90] \\
+Area fraction $>30^{\circ}$ & 11,760 & 2,552 & 2,573 & -0.157 & 2.62 & 0.918 & 0.986 & 0.63 [0.44, 0.82] \\
+Mean + within-catchment SD & 10,266 & 2,547 & 2,562 & -0.176 & 2.51 & 0.900 & 0.992 & 0.65 [0.41, 0.89] \\
+\midrule
+$S_c$ (slope-scale integrated) & 10,597 & 2,550 & 2,568 & -0.180 & 2.46 & 0.887 & 0.995 & 0.99 [0.77, 1.22] \\
+$S_c$ as fixed offset & 11,774 & 2,551 & 2,574 & -0.143 & 2.66 & 0.927 & 0.950 & -- \\
+\bottomrule
+\end{tabular}
+\end{table*}

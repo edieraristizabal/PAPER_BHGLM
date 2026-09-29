@@ -1,0 +1,22 @@
+\begin{table}[h]
+\caption{Model comparison under alternative count likelihoods. All specifications share the predictors, Queen adjacency and $\log(A_i)$ offset of the main models. MI: residual Moran's I (Eq.~\ref{eq:moran}); max $|r|$: largest absolute Pearson residual.}\label{tabA5}
+\footnotesize
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Specification & DIC & WAIC & MI & max $|r|$ \\
+\midrule
+M1, Poisson & 10,941 & 27,104 & 0.513 & 35.3 \\
+M1, negative binomial & 3,453 & 3,454 & 0.555 & 35.0 \\
+M1, zero-inflated Poisson & 9,740 & 31,962 & 0.500 & 33.5 \\
+M1, zero-inflated neg.\ binomial & 3,455 & 3,455 & 0.553 & 34.6 \\
+M1, hurdle Poisson & 9,757 & 31,822 & 0.499 & 33.7 \\
+M4-BYM, Poisson & 2,551 & 2,564 & 0.089 & 1.5 \\
+M4-BYM, negative binomial & 3,194 & 3,207 & 0.255 & 25.6 \\
+M5-Leroux, Poisson & 2,572 & 2,618 & -0.172 & 1.7 \\
+M5-Leroux, zero-inflated Poisson & 2,575 & 2,567 & -0.106 & 10.4 \\
+M5-Leroux, negative binomial & 2,956 & 2,990 & -0.141 & 7.9 \\
+M5-Leroux, zero-inflated neg.\ binomial & 2,980 & 2,998 & -0.129 & 8.6 \\
+M5-Leroux, hurdle neg.\ binomial & 3,332 & 3,337 & 0.099 & 12.1 \\
+\bottomrule
+\end{tabular}
+\end{table}

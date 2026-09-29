@@ -1,0 +1,3 @@
+"check","pearson_r","mean_abs_diff","max_abs_diff"
+"slope_mean12 vs slope_mean",0.999999776998159,0.00100384385482987,0.0534325239756406
+"elev_mean12 vs elev_mean",0.999999960181868,0.0447766218332109,2.44605394759265
