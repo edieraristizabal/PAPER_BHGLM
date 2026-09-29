@@ -497,10 +497,10 @@ The residual Moran's Index (MI) is 0.089, indicating a substantial reduction in 
 \subsection{Model 5: Leroux model}\label{subsec45}
 
 The posterior estimates for the fixed effects remain credibly positive. 
-Both slope and elevation retain significant contributions to landslide susceptibility, with posterior means of 0.840 and 0.652, respectively. 
-In contrast, the effect of rainfall days remains low and statistically ambiguous (0.123); \hl{as in M4, its 95\% credible interval spans zero [-0.18, 0.43]}, consistent with the pattern observed in the BYM model.
+Both slope and elevation retain significant contributions to landslide susceptibility, with posterior means of \hlE{0.841 and 0.653}, respectively. 
+In contrast, the effect of rainfall days remains low and statistically ambiguous (\hlE{0.122}); \hl{as in M4, its 95\% credible interval spans zero [-0.18, 0.43]}, consistent with the pattern observed in the BYM model.
 
-\hl{The posterior mean of $\rho = 0.893$} shows a strong spatial dependency, indicating that most of the variability in the latent field is explained by the spatially structured component. 
+\hl{The posterior mean of} \hlE{$\rho = 0.894$} shows a strong spatial dependency, indicating that most of the variability in the latent field is explained by the spatially structured component. 
 \hlE{This indicates that the residual variation left by the predictors is dominated by a component shared among neighbouring catchments: nearly 89\% of the unexplained variability is spatially structured rather than independent.} 
 \hl{This is consistent with, but does not by itself identify, unobserved spatially contiguous factors such as lithology, soil type, or fracture networks; distinguishing among these candidate drivers would require additional, explicitly geological covariates.}
 
@@ -513,28 +513,28 @@ However, the residual Moran's Index (MI) is} \hlE{-0.172,} \hl{the most favourab
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{Fig08_M5_leroux.jpg}
-\caption{Model M5 – Leroux.(A) Predicted landslide counts from the Leroux model, which flexibly combines spatial and unstructured effects through a data-driven spatial dependency parameter \hl{($\rho$=0.893)}. (B) Pearson residuals demonstrate low residual spatial structure \hl{(MI =} \hlE{-0.172)}, confirming that the Leroux formulation effectively mitigates spatial autocorrelation while maintaining model parsimony and interpretability.}
+\caption{Model M5 – Leroux.(A) Predicted landslide counts from the Leroux model, which flexibly combines spatial and unstructured effects through a data-driven spatial dependency parameter \hlE{($\rho$=0.894)}. (B) Pearson residuals demonstrate low residual spatial structure \hl{(MI =} \hlE{-0.172)}, confirming that the Leroux formulation effectively mitigates spatial autocorrelation while maintaining model parsimony and interpretability.}
 \label{Fig8}
 \end{figure}
 
 \begin{table}[h]
-\caption{Table 1. Results. Moran’s Index (MI). The inverse of the precision is the variance. \hl{All fixed-effect coefficients (M1-M5) are on standardized (mean 0, SD 1) predictors and are therefore directly comparable across models. Posterior standard deviations and 95\% credible intervals for all fixed effects are reported in} \hlE{\mbox{Appendix~\ref{secA3}} (\mbox{Table~\ref{tabA3}}).}}\label{tab1}
+\caption{Results. Moran’s Index (MI). The inverse of the precision is the variance. \hl{All fixed-effect coefficients (M1-M5) are on standardized (mean 0, SD 1) predictors and are therefore directly comparable across models. Posterior standard deviations and 95\% credible intervals for all fixed effects are reported in} \hlE{\mbox{Appendix~\ref{secA3}} (\mbox{Table~\ref{tabA3}}).}}\label{tab1}
 \begin{tabular}{@{}lccccc@{}}
 \toprule
 Variables & M1 & M2 & M3-ICAR & M4-BYM & M5-Leroux \\
 \midrule
 \textbf{Fixed Effects} & & & & & \\
-\rowcolor{yellow}Intercept & -15.551 & -15.684 & -16.856 & -16.745 & -16.750 \\
-\rowcolor{yellow}Rainfall days & 0.151 & 0.299 & 1.356 & 0.139 & 0.123 \\
-\rowcolor{yellow}Mean elevation & 0.413 & 0.485 & 0.833 & 0.410 & 0.652 \\
-\rowcolor{yellow}Mean slope & 0.617 & 0.661 & 0.729 & 0.742 & 0.840 \\
+\rowcolor{yellow}Intercept & -15.551 & -15.684 & -16.856 & -16.745 & \cellcolor{edcyan}-16.749 \\
+\rowcolor{yellow}Rainfall days & 0.151 & 0.299 & 1.356 & 0.139 & \cellcolor{edcyan}0.122 \\
+\rowcolor{yellow}Mean elevation & 0.413 & 0.485 & 0.833 & 0.410 & \cellcolor{edcyan}0.653 \\
+\rowcolor{yellow}Mean slope & 0.617 & 0.661 & 0.729 & 0.742 & \cellcolor{edcyan}0.841 \\
 \textbf{Random Effects} & & & & & \\
 \rowcolor{yellow}Atrato & - & -0.132 & -0.515 & -0.001 & 0.000 \\
 \rowcolor{yellow}Cauca & - & 0.311 & 0.754 & 0.001 & 0.000 \\
 \rowcolor{yellow}Magdalena & - & -0.179 & -0.239 & 0.000 & 0.000 \\
-\rowcolor{yellow}$\rho$ & - & - & 1 & - & 0.893 \\
+\rowcolor{yellow}$\rho$ & - & - & 1 & - & \cellcolor{edcyan}0.894 \\
 \rowcolor{yellow}Precision TMU & - & - & 0.324 & 1.452 & 0.398 \\
-\rowcolor{yellow}Precision basins & - & 27.4 & 4.83 & 21,824 & 22,051 \\
+\rowcolor{yellow}Precision basins & - & 27.4 & 4.83 & \cellcolor{edcyan}21,849 & \cellcolor{edcyan}22,114 \\
 \midrule
 \rowcolor{yellow}DIC & 10,941 & 9,469 & 2,602 & 2,551 & 2,572 \\
 \rowcolor{yellow}WAIC & 27,104 & 20,795 & 2,704 & 2,564 & 2,618 \\
@@ -557,7 +557,7 @@ The Leroux model (M5), by contrast, achieves the lowest (most negative) residual
 The ICAR model (M3) performs worst on both criteria (DIC = 2602, WAIC = 2704, MI = 0.243), consistent with its lack of an unstructured noise term to absorb local overdispersion.}
 
 \hl{Model selection criteria overwhelmingly favor the spatial models over the non-spatial baseline: all three spatial formulations (M3-M5) reduce DIC and WAIC by roughly three-quarters relative to M1, and reduce the residual Moran's Index from a strongly positive 0.513 to values at or below 0.24 (Table 1). 
-Within this trade-off between goodness of fit (favoring M4) and residual spatial independence (favoring M5), we retain the Leroux model (M5) as our} \hlE{reference formulation for describing the in-sample spatial structure,} \hl{because it provides the most complete removal of residual spatial autocorrelation} \hlE{within the observed study area} \hl{while estimating a single, interpretable mixing parameter ($\rho = 0.893$) that separates structured from unstructured spatial variability, a property neither M3 nor M4 offers directly. 
+Within this trade-off between goodness of fit (favoring M4) and residual spatial independence (favoring M5), we retain the Leroux model (M5) as our} \hlE{reference formulation for describing the in-sample spatial structure,} \hl{because it provides the most complete removal of residual spatial autocorrelation} \hlE{within the observed study area} \hl{while estimating a single, interpretable mixing parameter (}\hlE{$\rho = 0.894$}\hl{) that separates structured from unstructured spatial variability, a property neither M3 nor M4 offers directly. 
 The fixed effects remain stable and interpretable across M4 and M5, and the difference in DIC/WAIC between them (under 1\%) is small relative to the difference in residual spatial autocorrelation, which we consider the more direct diagnostic of whether the spatial dependence structure has been adequately captured.}
 
 \hl{Residual overdispersion is substantially reduced, but not eliminated, once an unstructured noise term is included: the TMU-level posterior variance is highest for the ICAR-only model (3.09, M3), which lacks such a term, and drops to 0.69-0.88 (M4) and 2.51 (M5) once one is included (Table 1), compared with the pronounced overdispersion visible in the M1 residuals. 
@@ -577,14 +577,14 @@ A key limitation of most hierarchical models previously used in landslide suscep
 This simplification neglects both local spatial interactions among neighboring TMUs and regional-scale spatial heterogeneity, potentially leading to biased or incomplete representations of the underlying spatial processes.
 
 \hl{Our findings quantify the magnitude of this residual spatial structure. 
-The model} \hlE{that most fully absorbs residual spatial autocorrelation in-sample} \hl{(M5 -- Leroux) estimated the spatial autoregressive parameter, $\rho$, at 0.893, indicating that most of the unexplained variability behaves as spatially structured rather than independent among catchments. 
+The model} \hlE{that most fully absorbs residual spatial autocorrelation in-sample} \hl{(M5 -- Leroux) estimated the spatial autoregressive parameter, $\rho$, at }\hlE{0.894}\hl{, indicating that most of the unexplained variability behaves as spatially structured rather than independent among catchments. 
 This shows that even after accounting for the known fixed-effect predictors (slope, elevation, rainfall), a substantial component of landslide occurrence is attributable to unobserved factors shared among neighboring catchments. 
 It is important to be precise about what this result does and does not show: the CAR/ICAR/BYM/Leroux formulations encode adjacency among catchments, demonstrating that neighboring units have correlated residuals, not that this correlation stems from any specific physical process. 
 Plausible sources of this structure include contiguous geological formations, soil properties, or anthropogenic disturbance not captured by our covariates, but confirming any of these would require relating the latent spatial field to independent geological or land-use data, which is beyond the scope of the present study} \citep{besag1991bayesian, lawson2018bayesian, morris2019bayesian}
 \hlE{. Our results nonetheless show that omitting this spatial dependence, as standard non-spatial models do, discards a statistically influential component of the observed landslide pattern. The latent field is, moreover, conditional not only on the included covariates but also on the adjacency definition, the model specification and the chosen spatial support; it is a property of the model--data combination rather than an estimate of a physical field. Consistently, the basin-level random intercepts collapse to essentially zero once catchment-level spatial structure is included, so the grouping by basins does not by itself support an interpretation in terms of tectonic or lithological domains.}
 
 By explicitly modeling this spatial structure (as in M3-M5), the model can disentangle these correlated effects, providing a less biased estimate of the \hlE{between-catchment association between the predictors and landslide counts}. 
-For instance, the slope coefficient increased from 0.617 (M1) to \hl{0.840} (M5), and elevation from \hl{0.413 to 0.652}, suggesting the spatial confounders in the M1 model were likely acting as suppressors.
+For instance, the slope coefficient increased from 0.617 (M1) to \hlE{0.841} (M5), and elevation from \hl{0.413 to} \hlE{0.653}, suggesting the spatial confounders in the M1 model were likely acting as suppressors.
 
 \hlE{These coefficients describe differences between catchments in their bulk terrain characteristics, not the behaviour of individual slopes, and the distinction is quantitative here. A slope-scale response estimated from within-catchment contrasts alone and integrated over each catchment implies a catchment-level slope effect about three times weaker than the one we estimate: on its original scale, the coefficient of this integrated covariate is 3.2 (95\% credible interval 2.4--3.9) in M5, against the value of 1 expected if the landslide activity of a catchment reflected only its summed slope-scale response (\mbox{Appendix~\ref{secA6}}). Catchment steepness thus also stands for correlated catchment-scale properties, such as incision, relief, regolith and hillslope--channel coupling, and possibly for spatially uneven detection (\mbox{Sect.~\ref{subsec54}}); when slope is restricted to act only through the slope-scale response, this excess is absorbed by the latent spatial field.}
 
@@ -596,7 +596,7 @@ This pattern suggests that rainfall-related spatial variability is being partial
 \hl{These findings align with, and extend, prior evidence from both the landslide and spatial-statistics literature. }
 \citet{lombardo2019geostatistical}\hl{ and }\citet{lombardo2020space}\hl{ similarly found that significant spatial dependencies persist in landslide occurrence even after including physical triggers such as rainfall or seismic shaking, consistent with our finding that a large majority (89\%) of the unexplained variability in M5 is spatially structured rather than independent. 
 The magnitude of residual-autocorrelation reduction we obtain (Moran's I from 0.513 in M1 to} \hlE{-0.172} \hl{in M5) is comparable to that reported for other spatial corrections applied to landslide susceptibility models:} \citet{li2019eigenvector}\hl{, for example, reduced the residual Moran's I of a logistic regression model to 0.027 using eigenvector spatial filtering, a result of the same order of magnitude as ours despite using a markedly different spatial-correction mechanism (covariate-based filtering rather than a latent CAR field). 
-The dominance of the spatially structured component over the unstructured component in our BYM and Leroux models ($\rho = 0.893$) also mirrors a common finding in the disease-mapping literature that motivated these formulations, where structured spatial variance frequently dominates unstructured heterogeneity in area-referenced count data }\citep{lawson2018bayesian, morris2019bayesian}\hl{.}
+The dominance of the spatially structured component over the unstructured component in our BYM and Leroux models (}\hlE{$\rho = 0.894$}\hl{) also mirrors a common finding in the disease-mapping literature that motivated these formulations, where structured spatial variance frequently dominates unstructured heterogeneity in area-referenced count data }\citep{lawson2018bayesian, morris2019bayesian}\hl{.}
 
 \hlE{Beyond statistical significance, the magnitude of these parameter effects has direct practical implications.} \hlE{In M5, a difference of one degree in mean catchment slope between catchments is associated with a 13.1\% difference in the expected landslide count, and a difference of 100 m in mean elevation with a 9.0\% difference. These figures are back-transformed to raw units by dividing each standardized coefficient by the standard deviation of the predictor (6.8$^{\circ}$ for slope and 756 m for elevation) before exponentiating. Because slope varies by several tens of degrees and elevation by hundreds to thousands of metres across the study area, these per-unit effects compound into several-fold differences in expected landslide frequency between low-relief and steep, high-elevation catchments. 
 By contrast, the rainfall-day effect is not credibly different from zero in the two most flexible spatial models (M4, M5), and in M5 it is carried almost entirely by the five highest-count catchments: it falls from 0.122 to 0.004 (95\% credible interval $[-0.30, 0.31]$) when they are excluded from the likelihood (\mbox{Appendix~\ref{secA5}}). Our data therefore provide no evidence of a between-catchment effect of rainfall frequency once spatial structure is accounted for; this does not contradict the role of rainfall as the trigger of individual events, which a catchment-level count model cannot resolve.} 
@@ -639,7 +639,7 @@ Landslide susceptibility is inherently a spatial process, and traditional models
 By integrating spatial dependency effects and spatial heterogeneity, these models address the limitations of standard multilevel models. 
 The incorporation of MRF models, such as ICAR, BYM, and Leroux, allows for a detailed representation of spatial relationships.
 
-\hlE{Ignoring this structure biases the fixed-effect estimates, which are between-catchment associations, and produces overconfident intervals. However, strongly CAR-dominated specifications have limited transferability: under spatially blocked cross-validation they become unstable when a contiguous neighbourhood is unobserved, and BYM is the more defensible choice where prediction into unobserved catchments is the objective. The spatial HGLMs yield more spatially coherent fitted surfaces and better-calibrated within-sample uncertainty than their non-spatial counterpart, but smoothness is a property of the CAR prior rather than evidence of predictive accuracy, and the magnitude of the latent field is an upper bound on the spatially structured process signal, because it may also reflect uneven landslide detection.}
+\hlE{Ignoring this structure biases the fixed-effect estimates, which are between-catchment associations, and produces overconfident intervals. However, strongly CAR-dominated specifications have limited transferability: under spatially blocked cross-validation they become unstable when a contiguous neighbourhood is unobserved, and BYM is the more defensible choice where prediction into unobserved catchments is the objective. The spatial HGLMs yield more spatially coherent fitted surfaces and better-calibrated within-sample uncertainty than their non-spatial counterpart, but smoothness is a property of the CAR prior rather than evidence of predictive accuracy, and the magnitude of the latent field is an upper bound on the spatially structured process signal, because it partly reflects distributional misfit and may also reflect uneven landslide detection.}
 
 \codedataavailability{Data and code used for this study are fully available in Github (https://github.com/edieraristizabal/PAPER\_BHGLM).} %% use this section when having data sets and software code available
 
@@ -726,14 +726,14 @@ Table~\ref{tabA3} reports the posterior mean, posterior standard deviation and 9
 \toprule
 Term & M1 & M2 & M3-ICAR & M4-BYM & M5-Leroux \\
 \midrule
-Intercept & -15.551 (0.013) & -15.684 (0.142) & -16.856 (0.356) & -16.745 (0.077) & -16.750 (0.241) \\
- & [-15.576,\, -15.525] & [-15.975,\, -15.394] & [-17.587,\, -16.144] & [-16.897,\, -16.597] & [-17.253,\, -16.293] \\
-Rainfall days & 0.151 (0.013) & 0.299 (0.015) & 1.356 (0.115) & 0.139 (0.135) & 0.123 (0.154) \\
- & [0.125,\, 0.176] & [0.269,\, 0.328] & [1.131,\, 1.584] & [-0.125,\, 0.405] & [-0.178,\, 0.427] \\
-Mean elevation & 0.413 (0.015) & 0.485 (0.016) & 0.833 (0.128) & 0.410 (0.119) & 0.652 (0.129) \\
- & [0.382,\, 0.443] & [0.454,\, 0.517] & [0.583,\, 1.086] & [0.178,\, 0.643] & [0.400,\, 0.905] \\
-Mean slope & 0.617 (0.013) & 0.661 (0.013) & 0.729 (0.094) & 0.742 (0.091) & 0.840 (0.106) \\
- & [0.592,\, 0.642] & [0.635,\, 0.687] & [0.545,\, 0.915] & [0.565,\, 0.920] & [0.633,\, 1.048] \\
+Intercept & -15.551 (0.013) & -15.684 (0.142) & -16.856 (0.356) & -16.745 (0.077) & -16.749 (0.240) \\
+ & [-15.576,\, -15.525] & [-15.975,\, -15.394] & [-17.587,\, -16.144] & [-16.897,\, -16.597] & [-17.250,\, -16.295] \\
+Rainfall days & 0.151 (0.013) & 0.299 (0.015) & 1.356 (0.115) & 0.139 (0.135) & 0.122 (0.154) \\
+ & [0.125,\, 0.176] & [0.269,\, 0.328] & [1.131,\, 1.584] & [-0.125,\, 0.405] & [-0.178,\, 0.426] \\
+Mean elevation & 0.413 (0.015) & 0.485 (0.016) & 0.833 (0.128) & 0.410 (0.119) & 0.653 (0.129) \\
+ & [0.382,\, 0.443] & [0.454,\, 0.517] & [0.583,\, 1.086] & [0.178,\, 0.643] & [0.401,\, 0.906] \\
+Mean slope & 0.617 (0.013) & 0.661 (0.013) & 0.729 (0.094) & 0.742 (0.091) & 0.841 (0.106) \\
+ & [0.592,\, 0.642] & [0.635,\, 0.687] & [0.545,\, 0.915] & [0.565,\, 0.920] & [0.634,\, 1.049] \\
 \bottomrule
 \end{tabular}
 \end{table*}

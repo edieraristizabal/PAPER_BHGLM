@@ -91,12 +91,14 @@ write_tex(c(
 ## ---------------------------------------------------------------
 ## Table A3: posterior summaries of the fixed effects
 ## ---------------------------------------------------------------
-ci <- read.csv(file.path(REV, "TableS2_credible_intervals.csv"), check.names = FALSE)
-terms <- unique(ci$Term)
-rows <- unlist(lapply(terms, function(t) {
-  s <- ci[ci$Term == t, ]
-  c(paste0(t, " & ", paste(sprintf("%s (%s)", fmt(s$Mean, 3), fmt(s$SD, 3)), collapse = " & "), " \\\\"),
-    paste0(" & ", paste(gsub(",", ",\\\\,", s$`95% CrI`), collapse = " & "), " \\\\"))
+fx <- read.csv(file.path(REV, "EC7/ec7_fixed_effects_all.csv"))   # single archived run (EC9)
+fx <- fx[fx$model %in% paste0("M", 1:5), ]
+term_lab <- c("(Intercept)" = "Intercept", RainfallDaysmean = "Rainfall days",
+              elev_mean = "Mean elevation", slope_mean = "Mean slope")
+rows <- unlist(lapply(names(term_lab), function(t) {
+  s <- fx[fx$term == t, ]; s <- s[match(paste0("M", 1:5), s$model), ]
+  c(paste0(term_lab[[t]], " & ", paste(sprintf("%s (%s)", fmt(s$mean, 3), fmt(s$sd, 3)), collapse = " & "), " \\\\"),
+    paste0(" & ", paste(sprintf("[%s,\\, %s]", fmt(s$q025, 3), fmt(s$q975, 3)), collapse = " & "), " \\\\"))
 }))
 write_tex(c(
   "\\begin{table*}[h]",
