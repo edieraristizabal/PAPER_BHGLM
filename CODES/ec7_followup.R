@@ -109,7 +109,7 @@ col_ok   <- "#0072B2"   # blue: observed value inside the predictive interval
 col_fail <- "#D55E00"   # vermillion: observed value outside it
 ppc$inside <- ppc$observed >= ppc$ppc_q025 & ppc$observed <= ppc$ppc_q975
 
-png("FIGURES/FigA3_posterior_predictive_checks.png",
+png("FIGURES/FigA4_posterior_predictive_checks.png",
     width = 2400, height = 1800, res = 260)
 op <- par(mfrow = c(2, 2), mar = c(4.2, 10.5, 3.0, 1.4), cex.axis = 0.82,
           cex.main = 1.0, font.main = 1, las = 1)
@@ -136,4 +136,4 @@ for (s in levels(ppc$stat)) {
 }
 par(op)
 dev.off()
-cat("\nFig. A3 written to FIGURES/FigA3_posterior_predictive_checks.png\n")
+cat("\nFig. A4 written to FIGURES/FigA4_posterior_predictive_checks.png\n")

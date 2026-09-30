@@ -195,5 +195,95 @@ write_tex(c(
   row6("$S_c$ as fixed offset", sc, fc, "S_c as fixed offset", cs("S_c as fixed offset")),
   "\\bottomrule", "\\end{tabular}", "\\end{table*}"), "tabA6.tex")
 
-## Figs. A2-A4 are written directly by figures_main.R, ec7_followup.R and ec4_figure.R
+## ---------------------------------------------------------------
+## Table A2b and Fig. A2: PCA of the candidate predictors
+## ---------------------------------------------------------------
+pv <- read.csv(file.path(REV, "LB/pca_variance.csv"))
+pl <- read.csv(file.path(REV, "LB/pca_loadings.csv"))
+ps <- read.csv(file.path(REV, "LB/pca_scores.csv"))
+write_tex(c(
+  "\\begin{table}[h]",
+  "\\caption{Principal component analysis of the eight continuous candidate predictors of the original screening (standardized): loadings on the first three components and share of variance explained.}\\label{tabA2pca}",
+  "\\footnotesize",
+  "\\begin{tabular}{@{}lrrr@{}}",
+  "\\toprule",
+  "Variable & PC1 & PC2 & PC3 \\\\",
+  "\\midrule",
+  paste(gsub("R_d", "$R_d$", pl$variable), "&", fmt(pl$PC1), "&", fmt(pl$PC2), "&", fmt(pl$PC3), "\\\\"),
+  "\\midrule",
+  paste("Variance explained (\\%) &", paste(fmt(100 * pv$explained[1:3], 1), collapse = " & "), "\\\\"),
+  paste("Cumulative (\\%) &", paste(fmt(100 * pv$cumulative[1:3], 1), collapse = " & "), "\\\\"),
+  "\\bottomrule", "\\end{tabular}", "\\end{table}"), "tabA2pca.tex")
+
+sc_ar <- 3.2
+arr <- data.frame(v = pl$variable, x = pl$PC1 * sc_ar, y = pl$PC2 * sc_ar)
+arr$lab <- sub(" \\(.*\\)", "", arr$v)
+pA2 <- ggplot(ps, aes(PC1, PC2)) +
+  geom_hline(yintercept = 0, colour = "grey80", linewidth = 0.3) + geom_vline(xintercept = 0, colour = "grey80", linewidth = 0.3) +
+  geom_point(aes(colour = basin, size = lands), alpha = 0.55, shape = 16) +
+  geom_segment(data = arr, aes(x = 0, y = 0, xend = x, yend = y), inherit.aes = FALSE,
+               arrow = arrow(length = unit(1.8, "mm")), linewidth = 0.4, colour = "grey15") +
+  ggrepel::geom_label_repel(data = arr, aes(x, y, label = lab), inherit.aes = FALSE, size = 2.5,
+             linewidth = 0, fill = alpha("white", 0.8), label.padding = unit(0.1, "lines"),
+             min.segment.length = 0, segment.colour = "grey40", segment.size = 0.25, box.padding = 0.35, seed = 1) +
+  scale_colour_manual(values = setNames(qualitative_hcl(3, palette = "Dark 3"), c("Atrato", "Cauca", "Magdalena")), name = "Basin") +
+  scale_size_area(max_size = 5, name = "Mapped landslides", breaks = c(10, 100, 300)) +
+  labs(x = sprintf("PC1 (%.1f%%)", 100 * pv$explained[1]), y = sprintf("PC2 (%.1f%%)", 100 * pv$explained[2])) +
+  coord_equal() + theme_bw(base_size = 9) + theme(panel.grid = element_blank())
+ggsave(file.path(FIG, "FigA2_pca_biplot.png"), pA2, width = 170, height = 120, units = "mm", dpi = 400, bg = "white")
+
+## ---------------------------------------------------------------
+## Table A7: model-specification checks (second editor round)
+## ---------------------------------------------------------------
+lb <- read.csv(file.path(REV, "LB/lb_model_summary.csv"))
+lab_m <- c(M1 = "M1", M2 = "M2", M2iid = "M2 + catchment iid (non-spatial)", M3 = "M3-ICAR", M4 = "M4-BYM", M5 = "M5-Leroux",
+           BYM2 = "BYM2 (PC priors)", M5_pcprior = "M5, PC prior on precision",
+           M4_nobasin = "M4, no basin effect", M5_nobasin = "M5, no basin effect",
+           M4_basinfixed = "M4, basin as fixed effect", M5_basinfixed = "M5, basin as fixed effect",
+           M4_lith_lc = "M4 + lithology + land cover", M5_lith_lc = "M5 + lithology + land cover",
+           M4_rw2 = "M4, rw2 slope and elevation", M5_rw2 = "M5, rw2 slope and elevation",
+           M5_noslope = "M5 without slope", M5_permslope = "M5, permuted slope")
+lb <- lb[match(names(lab_m), lb$model), ]
+fp <- function(p) ifelse(p <= 0.002, "$\\leq$0.002", fmt(p, 3))
+mix <- ifelse(!is.na(lb$phi_bym2), sprintf("$\\phi$ = %s", fmt(lb$phi_bym2, 2)),
+              ifelse(!is.na(lb$rho_leroux), sprintf("$\\rho$ = %s", fmt(lb$rho_leroux, 3)), "--"))
+ru <- ifelse(!is.na(lb$r_field_vs_M5), fmt(lb$r_field_vs_M5, 3), ifelse(!is.na(lb$r_field_vs_M4), fmt(lb$r_field_vs_M4, 3), "--"))
+sdl <- ifelse(is.na(lb$sd_latent_field), "--", fmt(lb$sd_latent_field, 2))
+write_tex(c(
+  "\\begin{table*}[h]",
+  "\\caption{Model-specification checks. DIC is not interpretable for M1 and M2 because their effective number of parameters $p_D$ is negative. MI: residual Moran's I with two-sided Monte Carlo $p$-value (999 permutations). $\\rho$: Leroux mixing parameter; $\\phi$: BYM2 share of the marginal latent variance that is spatially structured. SD: standard deviation of the posterior mean latent field. $r_u$: correlation of the latent field with that of M5 (M5 variants) or M4 (M4 variants).}\\label{tabA7}",
+  "\\footnotesize",
+  "\\begin{tabular}{@{}lrrrrrrlrr@{}}",
+  "\\toprule",
+  "Model & DIC & $p_D$ & WAIC & $p_{\\mathrm{WAIC}}$ & log mlik & MI ($p$) & Mixing & SD & $r_u$ \\\\",
+  "\\midrule",
+  paste(lab_m, "&", fmtn(lb$DIC), "&", fmtn(lb$pD), "&", fmtn(lb$WAIC), "&", fmtn(lb$pWAIC), "&", fmtn(lb$mlik), "&",
+        sprintf("%s (%s)", fmt(lb$MI, 3), fp(lb$MI_p_two_sided)), "&", mix, "&", sdl, "&", ru, "\\\\"),
+  "\\bottomrule", "\\end{tabular}", "\\end{table*}"), "tabA7.tex")
+
+## ---------------------------------------------------------------
+## Table A4b: cross-validation with predictive scores (second round)
+## ---------------------------------------------------------------
+if (file.exists(file.path(REV, "LB/cv_summary.csv"))) {
+  cvs <- read.csv(file.path(REV, "LB/cv_summary.csv"))
+  mods <- c("M1", "M2", "M2iid", "M3", "M4", "M5", "BYM2")
+  labs <- c("M1", "M2", "M2 + catchment iid", "M3-ICAR", "M4-BYM", "M5-Leroux", "BYM2")
+  g <- function(tp, m, v) { x <- cvs[cvs$type == tp & cvs$model == m, v]; if (length(x)) x else NA }
+  fr1 <- function(x) ifelse(is.na(x), "--", ifelse(x >= 1e4, sprintf("$%.1f \\times 10^{%d}$", x / 10^floor(log10(x)), floor(log10(x))), fmt(x, 1)))
+  rowsb <- sapply(seq_along(mods), function(i) paste(labs[i],
+    "&", fmt(g("spatial", mods[i], "log_score"), 2), "&", fr1(g("spatial", mods[i], "crps")), "&", fr1(g("spatial", mods[i], "rmse_median")),
+    "&", fmt(g("random", mods[i], "log_score"), 2), "&", fr1(g("random", mods[i], "crps")), "&", fr1(g("random", mods[i], "rmse_median")), "\\\\"))
+  write_tex(c(
+    "\\begin{table*}[h]",
+    "\\caption{Cross-validation with predictive scores. Spatially blocked: three $k$-means partitions of catchment centroids ($k = 5$, different seeds; 1578 held-out predictions per model); random: one random 5-fold partition (526 predictions). Scores are computed from 300 posterior samples of the linear predictor of each held-out catchment: log score (negative mean log predictive density) and continuous ranked probability score (CRPS), both negatively oriented, and the root-mean-square error of the predictive median.}\\label{tabA4b}",
+    "\\footnotesize",
+    "\\begin{tabular}{@{}lrrrrrr@{}}",
+    "\\toprule",
+    " & \\multicolumn{3}{c}{Spatially blocked} & \\multicolumn{3}{c}{Random} \\\\",
+    "\\cmidrule(lr){2-4}\\cmidrule(lr){5-7}",
+    "Model & Log score & CRPS & RMSE & Log score & CRPS & RMSE \\\\",
+    "\\midrule", rowsb, "\\bottomrule", "\\end{tabular}", "\\end{table*}"), "tabA4b.tex")
+}
+
+## Figs. A3-A5 are written directly by figures_main.R, ec7_followup.R and ec4_figure.R
 cat("appendix material written\n")

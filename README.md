@@ -23,13 +23,15 @@ All scripts are run from the repository root.
 |---|---|
 | `CODES/predictor_screening.py` | Candidate predictors and their correlation matrix (`RESULTS/TableS1_correlation_matrix.csv`, Table A2) |
 | `CODES/INLA.R` | Models M1–M5 (Table 1) |
-| `CODES/extract_credible_intervals.R`, `CODES/extract_random_effects.R` | Posterior summaries (Table A3) |
-| `CODES/linearity_check.py` | Linearity tests reported in Sect. 4.1 |
-| `CODES/spatial_cross_validation.R` | Spatially blocked cross-validation (Table A4) |
-| `CODES/ec7_response_distribution.R`, `CODES/ec7_followup.R` | Overdispersion, alternative likelihoods, posterior predictive checks and sensitivity analyses (Appendix A5, Table A5, Fig. A3) |
-| `CODES/ec4_zonal_12m.R` → `CODES/ec4_aggregation_sensitivity.R` → `CODES/ec4_slope_scale.R` → `CODES/ec4_figure.R` | Spatial support and slope-scale control (Appendix A6, Table A6, Fig. A4) |
-| `CODES/figures_main.R` | Figs. 2b, 4–8 and A2 |
-| `CODES/appendix_material.R` | Fig. A1 and Tables A1–A6 (`RESULTS/appendix_tables/`) |
+| `CODES/extract_credible_intervals.R`, `CODES/extract_random_effects.R` | Posterior summaries of the first revision |
+| `CODES/linearity_check.py` | Linearity tests of the first revision |
+| `CODES/spatial_cross_validation.R` | Spatially blocked cross-validation, per-fold RMSE of the posterior mean (Table A5) |
+| `CODES/ec7_response_distribution.R`, `CODES/ec7_followup.R` | Overdispersion, alternative likelihoods, posterior predictive checks, sensitivity to influential catchments; single archived run of M1–M5 (Tables 1, A4, A7; Fig. A4) |
+| `CODES/ec4_zonal_12m.R` → `CODES/ec4_aggregation_sensitivity.R` → `CODES/ec4_slope_scale.R` → `CODES/ec4_figure.R` | Spatial support and slope-scale control (Appendix A6, Table A8, Fig. A5) |
+| `CODES/levelB_models.R` | Model-specification checks: non-spatial overdispersed baseline, BYM2 and PC priors, basin level, lithology and land cover, rw2 effects, negative control, two-sided Moran's I, overdispersion-corrected linearity tests, PCA (Appendix A2 and A7; Tables A3 and A9) |
+| `CODES/levelB_cv.R` | Cross-validation with proper predictive scores (log score, CRPS, predictive median), three spatial and one random partition (Table A6) |
+| `CODES/figures_main.R` | Figs. 2b, 3b, 4–8 and A3 |
+| `CODES/appendix_material.R` | Figs. A1–A2 and the LaTeX tables of Appendix A (`RESULTS/appendix_tables/`) |
 | `CODES/flow.json` | Source of the workflow diagram (Fig. 1) |
 
 Figure files are named after their number in the manuscript (e.g. `Fig04_M1_poisson.jpg` is Fig. 4). Fig. 2a (study area) and Fig. 3a (neighbour graph) were produced in a GIS and are provided as final images.

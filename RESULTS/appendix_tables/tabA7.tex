@@ -1,0 +1,28 @@
+\begin{table*}[h]
+\caption{Model-specification checks. DIC is not interpretable for M1 and M2 because their effective number of parameters $p_D$ is negative. MI: residual Moran's I with two-sided Monte Carlo $p$-value (999 permutations). $\rho$: Leroux mixing parameter; $\phi$: BYM2 share of the marginal latent variance that is spatially structured. SD: standard deviation of the posterior mean latent field. $r_u$: correlation of the latent field with that of M5 (M5 variants) or M4 (M4 variants).}\label{tabA7}
+\footnotesize
+\begin{tabular}{@{}lrrrrrrlrr@{}}
+\toprule
+Model & DIC & $p_D$ & WAIC & $p_{\mathrm{WAIC}}$ & log mlik & MI ($p$) & Mixing & SD & $r_u$ \\
+\midrule
+M1 & 10,941 & -1,351 & 27,104 & 8,618 & -6,849 & 0.513 ($\leq$0.002) & -- & -- & -- \\
+M2 & 9,469 & -1,865 & 20,795 & 5,584 & -6,639 & 0.447 ($\leq$0.002) & -- & -- & -- \\
+M2 + catchment iid (non-spatial) & 2,605 & 421 & 2,639 & 312 & -1,734 & 0.335 ($\leq$0.002) & -- & 1.13 & -- \\
+M3-ICAR & 2,602 & 375 & 2,704 & 329 & -1,928 & 0.243 ($\leq$0.002) & -- & 1.95 & -- \\
+M4-BYM & 2,551 & 389 & 2,564 & 280 & -1,379 & 0.089 (0.012) & -- & 1.85 & 1.000 \\
+M5-Leroux & 2,572 & 392 & 2,618 & 302 & -1,645 & -0.172 ($\leq$0.002) & $\rho$ = 0.894 & 1.41 & 1.000 \\
+BYM2 (PC priors) & 2,554 & 391 & 2,568 & 282 & -1,637 & 0.110 ($\leq$0.002) & $\phi$ = 0.72 & 1.91 & -- \\
+M5, PC prior on precision & 2,572 & 391 & 2,618 & 302 & -1,641 & -0.174 ($\leq$0.002) & $\rho$ = 0.895 & 1.40 & 1.000 \\
+M4, no basin effect & 2,551 & 389 & 2,563 & 280 & -1,378 & 0.089 (0.016) & -- & 1.85 & 1.000 \\
+M5, no basin effect & 2,571 & 392 & 2,619 & 303 & -1,645 & -0.173 ($\leq$0.002) & $\rho$ = 0.894 & 1.41 & 1.000 \\
+M4, basin as fixed effect & 2,548 & 387 & 2,556 & 276 & -1,386 & 0.073 (0.052) & -- & 1.62 & 0.992 \\
+M5, basin as fixed effect & 2,572 & 393 & 2,622 & 305 & -1,654 & -0.172 ($\leq$0.002) & $\rho$ = 0.894 & 1.41 & 0.998 \\
+M4 + lithology + land cover & 2,552 & 390 & 2,566 & 281 & -1,394 & 0.094 (0.014) & -- & 1.91 & 0.999 \\
+M5 + lithology + land cover & 2,572 & 392 & 2,620 & 303 & -1,659 & -0.174 ($\leq$0.002) & $\rho$ = 0.899 & 1.42 & 0.996 \\
+M4, rw2 slope and elevation & 2,550 & 390 & 2,562 & 280 & -1,429 & 0.082 (0.028) & -- & 1.82 & 0.999 \\
+M5, rw2 slope and elevation & 2,567 & 389 & 2,610 & 299 & -1,695 & -0.177 ($\leq$0.002) & $\rho$ = 0.880 & 1.33 & 0.975 \\
+M5 without slope & 2,577 & 402 & 2,636 & 315 & -1,668 & -0.123 (0.004) & $\rho$ = 0.945 & 1.84 & 0.897 \\
+M5, permuted slope & 2,577 & 403 & 2,637 & 315 & -1,674 & -0.120 (0.004) & $\rho$ = 0.945 & 1.83 & 0.897 \\
+\bottomrule
+\end{tabular}
+\end{table*}

@@ -46,5 +46,5 @@ pb <- ggplot(pts, aes(percentile)) +
   labs(x = "Percentile of crown slope within its own catchment", y = "Density") + th
 
 fig <- (pa | pb) + plot_annotation(tag_levels = "a")
-ggsave("FIGURES/FigA4_slope_scale_control.png", fig,
+ggsave("FIGURES/FigA5_slope_scale_control.png", fig,
        width = 180, height = 80, units = "mm", dpi = 300)

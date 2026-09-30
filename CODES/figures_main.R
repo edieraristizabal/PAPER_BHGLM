@@ -4,7 +4,7 @@
 ##   Fig04   M1: Pearson residuals (A) and by basin (B)
 ##   Fig05   M2: Pearson residuals (A) and by basin (B)
 ##   Fig06-08 M3-M5: predicted counts (A) and Pearson residuals (B)
-##   FigA2_slope_partial_residual.png (appendix, replaces the Python version)
+##   FigA3_slope_partial_residual.png (appendix, replaces the Python version)
 ## Changes with respect to CODES/INLA.R (models are identical):
 ##  - Pearson residuals: perceptually uniform diverging HCL palette
 ##    (colorspace "Blue-Red 3") centred on zero;
@@ -133,7 +133,7 @@ pA2 <- ggplot(pr, aes(x, y)) +
   scale_colour_manual(values = c("LOWESS smooth" = pal2[1], "Linear fit" = pal2[2]), name = NULL) +
   labs(x = "Standardized mean catchment slope", y = "Partial residual (working scale)") +
   theme_classic(base_size = 10) + theme(legend.position = c(0.02, 0.98), legend.justification = c(0, 1))
-ggsave(file.path(REV, "FigA2_slope_partial_residual.png"), pA2, width = 110, height = 90, units = "mm", dpi = 400, bg = "white")
+ggsave(file.path(REV, "FigA3_slope_partial_residual.png"), pA2, width = 110, height = 90, units = "mm", dpi = 400, bg = "white")
 
 ## Colour-vision check: deuteranope and protanope simulations of the palettes
 pal_check <- list(diverging = diverging_hcl(9, "Blue-Red 3"), sequential = sequential_hcl(9, "YlOrRd"),
@@ -142,3 +142,14 @@ png("RESULTS/figs_colour_check.png", width = 1400, height = 900, res = 150)
 swatchplot(pal_check, cvd = c("deutan", "protan"))
 dev.off()
 cat("figures written\n")
+
+## Fig. 3b: binary Queen adjacency matrix (re-exported at print resolution)
+adj <- as.matrix(aoi.mat)
+nz  <- which(adj > 0, arr.ind = TRUE)
+p3b <- ggplot(data.frame(i = nz[, 1], j = nz[, 2]), aes(j, i)) +
+  geom_tile(fill = "black", width = 1, height = 1) +
+  scale_y_reverse(expand = c(0, 0), breaks = seq(100, 500, 100)) +
+  scale_x_continuous(expand = c(0, 0), breaks = seq(100, 500, 100), position = "top") +
+  coord_equal() + labs(x = NULL, y = NULL, caption = sprintf("%d x %d catchments", nrow(adj), ncol(adj))) +
+  theme_bw(base_size = 9) + theme(panel.grid = element_blank())
+ggsave(file.path(REV, "Fig03b_adjacency_matrix.png"), p3b, width = 90, height = 100, units = "mm", dpi = 400, bg = "white")
